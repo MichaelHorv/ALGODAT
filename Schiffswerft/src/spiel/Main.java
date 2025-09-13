@@ -14,14 +14,13 @@ import werft.Werft;
 public class Main {
     public static void main(String[] args) {
         Werft dieWerft = new Werft();
-        Kassa meineKassa = new Kassa();
         // Ablauf Monat für Monat
         try {
             while (true) {
                 // Werft arbeitet einen Monat
-                meineKassa.setKontostand(dieWerft.arbeitetEinenMonat(meineKassa.getKontostand()));
+                dieWerft.arbeitetEinenMonat();
                 // Ausgabe: Zustand der Werft
-                dieWerft.zustandAusgeben(meineKassa.getKontostand());
+                dieWerft.zustandAusgeben();
                 // Auswahl
                 int auswahl = InOut.readMenu("Was ist zu tun?",
                         "Ein Frachtschiff bauen@" +
@@ -35,34 +34,20 @@ public class Main {
                     case 1 ->// ein Frachtschiff bauen
                     {
                         Schiff frachtschiff = new Frachtschiff();
-                        if (frachtschiff.getPreis() > meineKassa.getKontostand()) {
-                            throw new KonkursException();
-                        } else {
-                            meineKassa.abziehen(frachtschiff.getPreis());
-                            dieWerft.hinzufuegen(frachtschiff);
-                        }
+                        dieWerft.hinzufuegen(frachtschiff);
+
 
                     }
                     case 2 -> // ein Passagierschiff bauen
                     {
                         Schiff passagierschiff = new Passagierschiff();
-                        if (passagierschiff.getPreis() > meineKassa.getKontostand()) {
-                            throw new KonkursException();
-                        } else {
-                            meineKassa.abziehen(passagierschiff.getPreis());
-                            dieWerft.hinzufuegen(passagierschiff);
-                        }
+                        dieWerft.hinzufuegen(passagierschiff);
 
                     }
                     case 3 -> // ein Tankschiff bauen
                     {
                         Schiff tankschiff = new Tankschiff();
-                        if (tankschiff.getPreis() > meineKassa.getKontostand()) {
-                            throw new KonkursException();
-                        } else {
-                            meineKassa.abziehen(tankschiff.getPreis());
-                            dieWerft.hinzufuegen(tankschiff);
-                        }
+                        dieWerft.hinzufuegen(tankschiff);
 
                     }
                     case 4 -> // ein Schiff streichen
@@ -72,7 +57,8 @@ public class Main {
                     }
                     case 5 -> // ein Schiff verschrotten
                     {
-                        // TODO ein  Schiff verschrotten
+                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben.");
+                        dieWerft.verschrotten(eingabe);
                     }
                     case 6 -> // Pause
                     {
@@ -93,6 +79,7 @@ public class Main {
             InOut.printString("Spielende");
         } catch (KonkursException e) {
             InOut.printString("---KONKURS---");
+            System.out.printf("Aktueller Kontostand: -%.2f Mio EUR\n", dieWerft.getMeineKassa().getKontostand());
             InOut.printString("Spiel Beendet");
         }
     }
