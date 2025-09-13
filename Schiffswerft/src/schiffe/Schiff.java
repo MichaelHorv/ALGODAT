@@ -1,7 +1,6 @@
 package schiffe;
 
 public abstract class Schiff {
-    public double getPreis;
     protected int kennzeichen;
     protected static int kennzeichenAlt;
     protected double preis;
