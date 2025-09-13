@@ -9,6 +9,10 @@ public class InOut {
 	public static void printString(String s) {
 		System.out.println(s);
 	}
+
+	public static void printStringFormat(String s) {
+		System.out.printf((s) + "%n");
+	}
 	
 	public static String readString(String prompt) throws InOutException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

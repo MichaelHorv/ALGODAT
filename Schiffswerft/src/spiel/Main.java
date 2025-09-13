@@ -1,45 +1,74 @@
 package spiel;
 
+import definitions.Definitions;
+import schiffe.Frachtschiff;
+import schiffe.Passagierschiff;
+import schiffe.Schiff;
+import schiffe.Tankschiff;
 import inout.InOut;
 import inout.InOutException;
-import spiel.SpielendeException;
+import werft.Kassa;
+import werft.KonkursException;
 import werft.Werft;
 
 public class Main {
     public static void main(String[] args) {
         Werft dieWerft = new Werft();
+        Kassa meineKassa = new Kassa();
         // Ablauf Monat für Monat
         try {
             while (true) {
                 // Werft arbeitet einen Monat
-                dieWerft.arbeitetEinenMonat();
+                meineKassa.setKontostand(dieWerft.arbeitetEinenMonat(meineKassa.getKontostand()));
                 // Ausgabe: Zustand der Werft
-                dieWerft.zustandAusgeben();
+                dieWerft.zustandAusgeben(meineKassa.getKontostand());
                 // Auswahl
                 int auswahl = InOut.readMenu("Was ist zu tun?",
                         "Ein Frachtschiff bauen@" +
                                 "Ein Passagierschiff bauen@" +
                                 "Ein Tankschiff bauen@" +
                                 "Ein Schiff streichen@" +
-                                "Ein Schiff verschrotte@" +
+                                "Ein Schiff verschrotten@" +
                                 "Nichts tun@" +
                                 "Spielende");
                 switch (auswahl) {
                     case 1 ->// ein Frachtschiff bauen
                     {
-                        // TODO ein Frachtschiff bauen
+                        Schiff frachtschiff = new Frachtschiff();
+                        if (frachtschiff.getPreis() > meineKassa.getKontostand()) {
+                            throw new KonkursException();
+                        } else {
+                            meineKassa.abziehen(frachtschiff.getPreis());
+                            dieWerft.hinzufuegen(frachtschiff);
+                        }
+
                     }
                     case 2 -> // ein Passagierschiff bauen
                     {
-                        // TODO ein Passagierschiff bauen
+                        Schiff passagierschiff = new Passagierschiff();
+                        if (passagierschiff.getPreis() > meineKassa.getKontostand()) {
+                            throw new KonkursException();
+                        } else {
+                            meineKassa.abziehen(passagierschiff.getPreis());
+                            dieWerft.hinzufuegen(passagierschiff);
+                        }
+
                     }
                     case 3 -> // ein Tankschiff bauen
                     {
-                        // TODO ein Tankschiff bauen
+                        Schiff tankschiff = new Tankschiff();
+                        if (tankschiff.getPreis() > meineKassa.getKontostand()) {
+                            throw new KonkursException();
+                        } else {
+                            meineKassa.abziehen(tankschiff.getPreis());
+                            dieWerft.hinzufuegen(tankschiff);
+                        }
+
                     }
                     case 4 -> // ein Schiff streichen
                     {
-                        // TODO ein Schiff streichen
+                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben.");
+                        dieWerft.streichen(eingabe);
                     }
                     case 5 -> // ein Schiff verschrotten
                     {
@@ -62,8 +91,9 @@ public class Main {
             InOut.printString("Fehleingabe, Spielende");
         } catch (SpielendeException x) {
             InOut.printString("Spielende");
-        } // catch (KonkursException x) {
-        //  InOut.printString("Spielende wegen Konkurs");
-        // }
+        } catch (KonkursException e) {
+            InOut.printString("---KONKURS---");
+            InOut.printString("Spiel Beendet");
+        }
     }
 }
