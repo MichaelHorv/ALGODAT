@@ -15,6 +15,8 @@ public class Werft {
         return meineKassa;
     }
 
+
+
     public Werft() {
     }
 
@@ -79,13 +81,15 @@ public class Werft {
         }
     }
 
-    public void streichen(int i) throws KonkursException {
+    public void streichen(int eingabe) throws KonkursException {
         double kontostand = meineKassa.getKontostand();
+        boolean found = false;
         for (Schiff schiff : meineSchiffe) {
-            int reparaturen = schiff.getReparaturen();
-            if (schiff.getKennzeichen() == i) {
+            if (schiff.getKennzeichen() == eingabe) {
+                int reparaturen = schiff.getReparaturen();
                 schiff.setZustand(100 - (reparaturen * 5));
                 reparaturen++;
+                found = true;
                 switch (schiff.getClass().getSimpleName()) {
                     case "Frachtschiff":
                         kontostand -= 1;
@@ -100,6 +104,13 @@ public class Werft {
                 schiff.setReparaturen(reparaturen);
             }
         }
+        if (!found) {
+            InOut.printString("Vorgang abgebrochen.");
+            InOut.printString("Kein Schiff mit diesem Kennzeichen verfügbar.");
+        } else {
+            InOut.printString("Schiff mit dem Kennzeichen " + eingabe + "wurde gestrichen.");
+        }
+        found = false;
         if (kontostand > 0) {
             meineKassa.setKontostand(kontostand);
         } else {
@@ -109,8 +120,10 @@ public class Werft {
 
     public void verschrotten(int eingabe) throws KonkursException {
         double kontostand = meineKassa.getKontostand();
+        boolean found = false;
         for (Schiff schiff : meineSchiffe) {
             if (schiff.getKennzeichen() == eingabe) {
+                found = true;
                 switch (schiff.getClass().getSimpleName()) {
                     case "Frachtschiff":
                         kontostand -= 0.1 * Definitions.FRACHTSCHIFFPREIS;
@@ -126,6 +139,12 @@ public class Werft {
                         break;
                 }
             }
+        }
+        if (!found) {
+            InOut.printString("Vorgang abgebrochen.");
+            InOut.printString("Kein Schiff mit diesem Kennzeichen verfügbar.");
+        } else {
+            InOut.printString("Schiff mit dem Kennzeichen " + eingabe + "wurde verschrottet.");
         }
         if (kontostand > 0) {
             meineKassa.setKontostand(kontostand);
