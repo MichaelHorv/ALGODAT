@@ -78,9 +78,9 @@ public class Main {
         } catch (SpielendeException x) {
             InOut.printString("Spielende");
         } catch (KonkursException e) {
-            InOut.printString("---KONKURS---");
+            InOut.printString("---------------GAME OVER---------------");
             System.out.printf("Aktueller Kontostand: -%.2f Mio EUR\n", dieWerft.getMeineKassa().getKontostand());
-            InOut.printString("Spiel Beendet");
+            InOut.printString("---------------------------------------");
         }
     }
 }
