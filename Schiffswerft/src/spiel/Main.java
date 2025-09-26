@@ -23,9 +23,9 @@ public class Main {
                 dieWerft.zustandAusgeben();
                 // Auswahl
                 int auswahl = InOut.readMenu("Was ist zu tun?",
-                        "Ein Frachtschiff bauen@" +
-                                "Ein Passagierschiff bauen@" +
-                                "Ein Tankschiff bauen@" +
+                        "Ein neues Frachtschiff bauen@" +
+                                "Ein neues Passagierschiff bauen@" +
+                                "Ein neues Tankschiff bauen@" +
                                 "Ein Schiff streichen@" +
                                 "Ein Schiff verschrotten@" +
                                 "Nichts tun@" +
