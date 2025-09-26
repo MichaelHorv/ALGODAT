@@ -52,12 +52,12 @@ public class Main {
                     }
                     case 4 -> // ein Schiff streichen
                     {
-                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben.");
+                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben:");
                         dieWerft.streichen(eingabe);
                     }
                     case 5 -> // ein Schiff verschrotten
                     {
-                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben.");
+                        int eingabe = InOut.readInt("Kennzeichen von Schiff eingeben:");
                         dieWerft.verschrotten(eingabe);
                     }
                     case 6 -> // Pause
