@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Werft {
-    List<Schiff> meineSchiffe = new ArrayList<Schiff>();
+    List<Schiff> meineSchiffe = new ArrayList<>();
     Kassa meineKassa = new Kassa();
 
     public Kassa getMeineKassa() {
@@ -110,7 +110,6 @@ public class Werft {
         } else {
             InOut.printString("Schiff mit dem Kennzeichen " + eingabe + "wurde gestrichen.");
         }
-        found = false;
         if (kontostand > 0) {
             meineKassa.setKontostand(kontostand);
         } else {
