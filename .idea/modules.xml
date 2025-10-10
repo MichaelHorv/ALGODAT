@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ALGODAT.iml" filepath="$PROJECT_DIR$/.idea/ALGODAT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InOut/InOut.iml" filepath="$PROJECT_DIR$/InOut/InOut.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Schiffswerft/Schiffswerft.iml" filepath="$PROJECT_DIR$/Schiffswerft/Schiffswerft.iml" />
+    </modules>
+  </component>
+</project>
