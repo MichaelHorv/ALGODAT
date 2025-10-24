@@ -21,12 +21,12 @@ public class Ball extends BasicBall implements Runnable {
 
 	public void run() {
 		while (shallRun) {
-            while (!isTouching(theRectangle)) {
+            while (!isTouching(theRectangle) && shallRun) {
                 delay();
                 move();
             }
             theRectangle.occupy();
-            while(isTouching(theRectangle)){
+            while(isTouching(theRectangle) && shallRun){
                 delay();
                 move();
             }
@@ -36,6 +36,7 @@ public class Ball extends BasicBall implements Runnable {
 
 	public void stop() {
 		shallRun = false;
+
         
 	}
 

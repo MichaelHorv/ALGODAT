@@ -21,7 +21,7 @@ public class BasicBallRectangle {
 
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.drawRect( posx, posy, sizex, sizey);	
+		g.drawRect( posx, posy, sizex, sizey);
 	}
 	
 }

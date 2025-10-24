@@ -36,15 +36,16 @@ public class BallsModel {
 	}
 
 
-	public void removeABall() {
+	public synchronized void removeABall() {
 		if ( ! theBallSet.isEmpty() ) {
-            int ballsOut = theBallSet.size();
-            if (ballsOut < Definitions.MAXBALLSINRECT) {
-            }
-                BallRectangle.setInRect(ballsOut);
-            }
 			Ball b = theBallSet.iterator().next();
+			if (b.isTouching(theRectangle) && theBallSet.size() <= Definitions.MAXBALLSINRECT)
+			{
+				theRectangle.free();
+			}
 			b.stop();
 			theBallSet.remove(b);
+
 		}
 	}
+}
