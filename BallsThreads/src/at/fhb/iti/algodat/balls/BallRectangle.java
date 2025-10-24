@@ -27,13 +27,6 @@ public class BallRectangle extends BasicBallRectangle {
     }
 
 	public synchronized void free() {
-        while (inRect < Definitions.MAXBALLSINRECT)
-        {
-            try {
-                wait();
-            } catch (Exception ignored)
-            {}
-        }
         inRect--;
         notify();
 	}
