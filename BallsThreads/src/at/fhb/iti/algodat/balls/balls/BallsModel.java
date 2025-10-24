@@ -5,6 +5,7 @@ import java.util.Set;
 
 import at.fhb.iti.algodat.balls.Ball;
 import at.fhb.iti.algodat.balls.BallRectangle;
+import at.fhb.iti.algodat.balls.defs.Definitions;
 
 public class BallsModel {
 
@@ -37,10 +38,13 @@ public class BallsModel {
 
 	public void removeABall() {
 		if ( ! theBallSet.isEmpty() ) {
+            int ballsOut = theBallSet.size();
+            if (ballsOut < Definitions.MAXBALLSINRECT) {
+            }
+                BallRectangle.setInRect(ballsOut);
+            }
 			Ball b = theBallSet.iterator().next();
 			b.stop();
 			theBallSet.remove(b);
 		}
 	}
-
-}
