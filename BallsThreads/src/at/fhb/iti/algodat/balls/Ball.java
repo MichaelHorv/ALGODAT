@@ -6,26 +6,37 @@ import at.fhb.iti.algodat.balls.grafics.BallsPanel;
 
 public class Ball extends BasicBall implements Runnable {
 
-	private BallRectangle theRectangle;
+    private boolean shallRun;
+    private BallRectangle theRectangle;
 	private Thread theThread;
 
 	public Ball(BallsPanel ballsPanel, BallRectangle br) {
 		super(ballsPanel);
 		theRectangle = br;
+        shallRun = true;
 
-		// TODO Make the balls fly
+        new Thread(this).start();
 
 	}
 
 	public void run() {
-		// TODO rework run()
-		while ( true ) {
-			delay(); move();
-		}
+		while (shallRun) {
+            while (!isTouching(theRectangle)) {
+                delay();
+                move();
+            }
+            theRectangle.occupy();
+            while(isTouching(theRectangle)){
+                delay();
+                move();
+            }
+            theRectangle.free();
+        }
 	}
 
 	public void stop() {
-		// TODO stop()
+		shallRun = false;
+        
 	}
 
 	private void delay() {
